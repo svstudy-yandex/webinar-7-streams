@@ -61,7 +61,9 @@ public class Main {
     private static void sortWithLambda() {
         List<Task> tasks = generateTasks();
 
-        tasks.sort((o1, o2) -> o1.getId() - o2.getId());
+        tasks.sort((Task o1, Task o2) -> {
+            return o1.getId() - o2.getId();
+        });
 
         System.out.println(tasks);
     }
