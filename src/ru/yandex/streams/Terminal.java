@@ -26,6 +26,11 @@ public class Terminal {
                 .findFirst();
         System.out.println(firstTask.orElse(null));
 
+        if (firstTask.isPresent()) {
+            System.out.println(firstTask);
+        }
+        firstTask.ifPresent(t -> System.out.println(t));
+
         firstTask = Stream.<Task>empty().findFirst();
         System.out.println(firstTask.orElse(null));
 
@@ -103,7 +108,7 @@ public class Terminal {
 
         System.out.println("\n=== sum example ===");
         int sum = Stream.of(1, 2, 3, 1, 2, 3)
-                .mapToInt(Integer::intValue)
+                .mapToInt(i -> i)
                 .sum();
         System.out.println(sum);
 

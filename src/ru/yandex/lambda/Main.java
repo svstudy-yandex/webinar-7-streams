@@ -8,6 +8,8 @@ import java.util.function.Consumer;
 
 public class Main {
     public static void main(String[] args) {
+        int i = 3;
+        Task t = new Task(1);
 
         // Отдельный класс
         sortWithSeparateClass();
@@ -61,9 +63,7 @@ public class Main {
     private static void sortWithLambda() {
         List<Task> tasks = generateTasks();
 
-        tasks.sort((Task o1, Task o2) -> {
-            return o1.getId() - o2.getId();
-        });
+        tasks.sort((o1, o2) -> o1.getId() - o2.getId());
 
         System.out.println(tasks);
     }

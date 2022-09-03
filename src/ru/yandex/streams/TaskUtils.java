@@ -2,6 +2,7 @@ package ru.yandex.streams;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TaskUtils {
@@ -20,5 +21,15 @@ public class TaskUtils {
             task.setSubtasksIds(subtasks);
         }
         return tasks.stream();
+    }
+
+    public static Stream<Task> getTasksStreamNew() {
+        return Stream.iterate(1, i -> i <= 10, i -> i++)
+                .map(id -> new Task(id))
+                .peek(t -> t.setSubtasksIds(
+                        Stream.iterate(1, i -> i <= 10, i -> i++)
+                                .map(i -> 100 * t.getId() + i)
+                                .collect(Collectors.toList())
+                ));
     }
 }
