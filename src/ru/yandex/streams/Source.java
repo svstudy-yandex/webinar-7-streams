@@ -67,6 +67,12 @@ public class Source {
         str.chars()
                 .forEach(System.out::println);
 
+        // solution to print characters (by Александра Кожевникова)
+        System.out.println("\n=== String.chars() example 2 ===");
+        str.chars()
+                .mapToObj(c -> (char)c)
+                .forEach(System.out::println);
+
     }
 
     private static Collection<Integer> getNumbers() {
