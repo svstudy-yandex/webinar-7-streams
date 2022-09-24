@@ -78,6 +78,12 @@ public class Intermediate {
                 .map(i -> (i % 2 == 0) ? null : i)
                 .filter(i -> i != null)
                 .forEach(System.out::println);
+
+        System.out.println("\n=== mapToObj example ===");
+        String str = "Hello world!";
+        str.chars()
+                .mapToObj(c -> (char)c)
+                .forEach(System.out::println);
     }
 
 }
