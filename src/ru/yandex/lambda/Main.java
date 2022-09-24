@@ -61,7 +61,7 @@ public class Main {
     private static void sortWithLambda() {
         List<Task> tasks = generateTasks();
 
-        tasks.sort((Task o1, Task o2) -> {
+        tasks.sort((o1, o2) -> {
             return o1.getId() - o2.getId();
         });
 
@@ -87,9 +87,14 @@ public class Main {
     private static void funcInterfaceChain() {
         List<Task> tasks = generateTasks();
 
-        Consumer<Task> printId = t -> System.out.println(t.getId());
-        Consumer<Task> printToString = t -> System.out.println(t.toString());
-        forEach(tasks, printId.andThen(printToString));
+        //Consumer<Task> printId = t -> System.out.println(t.getId());
+        //Consumer<Task> printToString = t -> System.out.println(t.toString());
+
+        tasks.sort((o1, o2) -> {
+            return o1.getId() - o2.getId();
+        });
+
+        forEach(tasks, t -> System.out.println(t.getId()));
     }
 
     private static void forEach(List<Task> tasks, Consumer<Task> consumer) {

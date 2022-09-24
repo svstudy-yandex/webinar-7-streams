@@ -75,6 +75,7 @@ public class Terminal {
         System.out.println("\n=== reduce example ===");
         int reduceResult = Stream.iterate(1, i -> i <= 5, i -> i + 1)
                 .reduce(1, (acum, cur) -> acum * cur);
+
         System.out.println(reduceResult);
 
         String concat = Stream.of("a","b","c","d")

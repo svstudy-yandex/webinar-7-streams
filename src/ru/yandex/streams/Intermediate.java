@@ -1,6 +1,8 @@
 package ru.yandex.streams;
 
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -21,11 +23,19 @@ public class Intermediate {
                 .forEach(System.out::println);
 
 
-        System.out.println("\n=== flatMap example ===");
+        System.out.println("\n=== flatMap example (1) ===");
         getTasksStream()
                 .map(t -> t.getSubtasksIds())
-                .flatMap(s -> s.stream())
                 .forEach(System.out::println);
+
+        System.out.println("\n=== flatMap example ===");
+        getTasksStream()
+                .filter(t -> t.getId() >= 3 && t.getId() <= 8)
+                .map(t -> t.getSubtasksIds())
+                .flatMap(l -> l.stream())
+                .filter(i -> i % 2 == 0)
+                .map(i -> i + " ")
+                .forEach(System.out::print);
 
 
         System.out.println("\n=== peek, distinct example ===");
@@ -33,6 +43,22 @@ public class Intermediate {
                 .peek(i -> System.out.println("peek: " + i))
                 .distinct()
                 .forEach(System.out::println);
+
+        getTasksStream()
+                .peek(t -> t.setSubtasksIds(List.of()))
+                .forEach(System.out::println);
+
+        System.out.println("\n=== several streams example ===");
+        List<Integer> l = List.of(1,2,3,4,5,6,7,8,9);
+        List<Integer> evenlist = l.stream()
+                .filter(i -> i % 2 == 0)
+                .collect(Collectors.toList());
+        System.out.println(evenlist);
+
+        List<Integer> oddlist = l.stream()
+                .filter(i -> i % 2 != 0)
+                .collect(Collectors.toList());
+        System.out.println(oddlist);
 
 
         System.out.println("\n=== limit, sorted example ===");
@@ -76,6 +102,15 @@ public class Intermediate {
                 //.filter(i -> i != null) // error
                 .boxed()
                 .map(i -> (i % 2 == 0) ? null : i)
+                /*
+                .map(i -> {
+                    if (i % 2 == 0) {
+                        return null;
+                    } else {
+                        return i;
+                    }
+                })
+                 */
                 .filter(i -> i != null)
                 .forEach(System.out::println);
 
